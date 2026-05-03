@@ -17,7 +17,7 @@ public class ATMMachine {
     public ATMMachine(ATM atm, ATMRepository atmRepository){
         this.atmRepository = atmRepository;
         this.atm = atm;
-        this.state = ATMStateFactory.getState(atm.getAtmStatus(), this);
+        this.state = new IdleState(this);
     }
     public Card getCard() {
         return card;

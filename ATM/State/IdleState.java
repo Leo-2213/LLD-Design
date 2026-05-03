@@ -14,7 +14,7 @@ public class IdleState implements ATMState{
 
     @Override
     public void insertCard(Card card){
-        atmMachine.insertCard(card);
+        atmMachine.setCard(card);
         System.out.println("Card Inserted.");
         atmMachine.setState(new CardInsertedState(atmMachine));
     }

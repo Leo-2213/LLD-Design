@@ -46,7 +46,7 @@ public class DispenseCashState implements ATMState{
             cashDispenser.dispense(atmMachine.getAtm(), cash);
             atmMachine.getAtm().setCashAvailable(atmBalance - cash);
             atmMachine.getCard().getBankAccount().setAccountBalance(balanceInAccount - cash);
-            System.out.println("Cash Dispensed" + cash);
+            System.out.println("Cash Dispensed : " + cash);
         }else{
             System.out.println("Cash can not be Dispensed. Invalid amount");
             ejectCard();

@@ -19,7 +19,7 @@ public class Main {
         machine.insertCard(visaCard);
         machine.enterPin("8989");
         machine.selectOption("Withdraw");
-        machine.dispenseCash(4500);
+        machine.dispenseCash(1200);
 
     }
 }
