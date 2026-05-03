@@ -45,7 +45,7 @@ public class Screen {
         public Builder addSeats(SeatType seatType, int count){
             if(count <= 0){
                 System.out.println("At least one seat should present");
-                return null;
+                return this;
             }
             seatTypeCountMap.put(seatType, count);
             return this;

@@ -3,6 +3,7 @@ package LLDDesigns.BookMyShow.Repository;
 import LLDDesigns.BookMyShow.model.Movie;
 import LLDDesigns.BookMyShow.model.Show;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -14,10 +15,17 @@ public class ShowRepository {
     }
 
     public List<Show> getAllShowsByMovieName(String movieName){
-        return showList.getOrDefault(movieName, null);
+        List<Show> shows = showList.get(movieName);
+        if (shows == null) {
+            return Collections.emptyList();
+        }
+        return shows;
     }
     public Show getShowByMovieNameAndId(String movieName, int id){
         List<Show> shows = showList.get(movieName);
+        if (shows == null) {
+            return null;
+        }
         for(Show show : shows){
             if(show.getShowId() == id){
                 return show;

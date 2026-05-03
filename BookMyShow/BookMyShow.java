@@ -6,11 +6,16 @@ import LLDDesigns.BookMyShow.Repository.BookingRepository;
 import LLDDesigns.BookMyShow.Repository.ShowRepository;
 import LLDDesigns.BookMyShow.Strategy.CardPayment;
 import LLDDesigns.BookMyShow.Strategy.PaymentStrategy;
-import LLDDesigns.BookMyShow.model.*;
+import LLDDesigns.BookMyShow.model.Movie;
+import LLDDesigns.BookMyShow.model.Screen;
+import LLDDesigns.BookMyShow.model.Show;
+import LLDDesigns.BookMyShow.model.ShowSeatKey;
+import LLDDesigns.BookMyShow.model.Theater;
+import LLDDesigns.BookMyShow.model.Booking;
+import LLDDesigns.BookMyShow.model.Ticket;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class BookMyShow {
     public static void main(String[] args) {
@@ -36,9 +41,9 @@ public class BookMyShow {
         bastardsShow.add(new Show(3,theater3, screen1C, 2.30, 4.20, new Movie("Bastards", 140)));
 
         List<Show> badGuyShow = new ArrayList<>();
-        bastardsShow.add(new Show(1,theater1, screen2A, 11.30, 2.20, new Movie("Bad guy", 140)));
-        bastardsShow.add(new Show(2,theater2, screen2B, 1.30, 3.20, new Movie("Bad guy ", 140)));
-        bastardsShow.add(new Show(3,theater3, screen2C, 2.30, 4.20, new Movie("Bad guy", 140)));
+        badGuyShow.add(new Show(1,theater1, screen2A, 11.30, 2.20, new Movie("Bad guy", 140)));
+        badGuyShow.add(new Show(2,theater2, screen2B, 1.30, 3.20, new Movie("Bad guy ", 140)));
+        badGuyShow.add(new Show(3,theater3, screen2C, 2.30, 4.20, new Movie("Bad guy", 140)));
 
         showRepository.addShow("Bastards", bastardsShow );
         showRepository.addShow("badGuyShow", badGuyShow);
@@ -47,14 +52,20 @@ public class BookMyShow {
 
         List<Show> listOfShows = bookMyShowController.getAllAvailableShows("Bastards");
 
-        List<Seat> selectedSeat = new ArrayList<>();
-        selectedSeat.add(new ReclinerSeat(1));
-        selectedSeat.add(new ReclinerSeat(2));
-        selectedSeat.add(new PrimeSeat(3));
-        selectedSeat.add(new PrimeSeat(4));
+        Show bastardsFirstShow = showRepository.getShowByMovieNameAndId("Bastards", 1);
+        List<ShowSeatKey> selectedSeats = List.of(
+                new ShowSeatKey(SeatType.Recliner, 1),
+                new ShowSeatKey(SeatType.Recliner, 2),
+                new ShowSeatKey(SeatType.Prime, 3),
+                new ShowSeatKey(SeatType.Prime, 4)
+        );
 
-        Booking booking = bookMyShowController.createBooking(selectedSeat, showRepository.getShowByMovieNameAndId("Bastards", 1));
-
-        Ticket ticket = bookMyShowController.confirmBooking(booking.getBookingId(), new CardPayment());
+        Booking booking = bookMyShowController.createBooking(bastardsFirstShow, selectedSeats);
+        if (booking != null) {
+            Ticket ticket = bookMyShowController.confirmBooking(booking.getBookingId(), new CardPayment());
+            if (ticket != null) {
+                System.out.println(ticket);
+            }
+        }
     }
 }

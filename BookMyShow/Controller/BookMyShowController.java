@@ -4,7 +4,10 @@ import LLDDesigns.BookMyShow.Repository.BookingRepository;
 import LLDDesigns.BookMyShow.Repository.ShowRepository;
 import LLDDesigns.BookMyShow.Services.BookMyShowService;
 import LLDDesigns.BookMyShow.Strategy.PaymentStrategy;
-import LLDDesigns.BookMyShow.model.*;
+import LLDDesigns.BookMyShow.model.Booking;
+import LLDDesigns.BookMyShow.model.Show;
+import LLDDesigns.BookMyShow.model.ShowSeatKey;
+import LLDDesigns.BookMyShow.model.Ticket;
 
 import java.util.List;
 
@@ -18,8 +21,8 @@ public class BookMyShowController {
         return bookMyShowService.getAllAvailableShows(movieName);
     }
 
-    public Booking createBooking(List<Seat> seatList, Show show){
-        return bookMyShowService.createBooking(seatList, show);
+    public Booking createBooking(Show show, List<ShowSeatKey> seatKeys){
+        return bookMyShowService.createBooking(show, seatKeys);
 
     }
 
