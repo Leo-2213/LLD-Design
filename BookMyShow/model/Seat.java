@@ -29,4 +29,9 @@ public abstract class Seat {
         this.bookingStage = BookingStage.Available;
     }
 
+    @Override
+    public String toString() {
+        return seatType + "-" + seatId;
+    }
+
 }

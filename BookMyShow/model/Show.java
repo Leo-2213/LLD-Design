@@ -7,6 +7,7 @@ public class Show {
     private final double startTime;
     private final double endTime;
     private Movie movie;
+// can add seats here as per Vishal's knowledge
 
     public Show(int showId, Theater theater, Screen screen, double startTime, double endTime, Movie movie) {
         this.showId = showId;

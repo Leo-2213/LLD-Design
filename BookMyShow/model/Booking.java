@@ -45,6 +45,10 @@ public class Booking {
         return this.bookingStage;
     }
 
+    public void setBookingStage(BookingStage bookingStage) {
+        this.bookingStage = bookingStage;
+    }
+
     public static class Builder{
         private final String bookingId;
         private Movie movie;

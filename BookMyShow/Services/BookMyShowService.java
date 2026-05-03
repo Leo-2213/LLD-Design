@@ -25,6 +25,7 @@ public class BookMyShowService {
     }
 
     public Booking createBooking(List<Seat> seatList, Show show) {
+        // can make it in a different method
         for(Seat seat : seatList){
             if(seat.getBookingStage() != BookingStage.Available){
                 System.out.println("The seat is already booked or in booking stage");
@@ -32,14 +33,20 @@ public class BookMyShowService {
             }
         }
         Booking booking = new Booking.Builder().theater(show.getTheater()).movie(show.getMovie()).screen(show.getScreen()).seats(seatList).build();
+        booking.setBookingStage(BookingStage.Locked);
         for(Seat seat : seatList){
             seat.setBookingStage(BookingStage.Locked);
         }
+        bookingRepository.addBooking(booking);
         return booking;
     }
 
     public Ticket confirmBooking(String bookingId, PaymentStrategy paymentStrategy) {
         Booking booking = bookingRepository.getBooking(bookingId);
+        if (booking == null) {
+            System.out.println("Booking not found for id: " + bookingId);
+            return null;
+        }
         if(booking.getBookingStage() != BookingStage.Locked){
             System.out.println("Booking can not be completed because of some technical error");
             return  null;
@@ -50,6 +57,8 @@ public class BookMyShowService {
         Ticket ticket = new Ticket(booking.getMovie(), booking.getTheater(), booking.getScreen(), seats, totalCost);
 
         paymentStrategy.pay(totalCost);
+
+        booking.setBookingStage(BookingStage.Booked);
 
         System.out.println("Payment is done Here is the Ticket " + ticket.toString());
 

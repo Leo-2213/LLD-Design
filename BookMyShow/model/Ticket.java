@@ -1,6 +1,8 @@
 package LLDDesigns.BookMyShow.model;
 
+import java.text.DecimalFormat;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Ticket {
     private final Movie movie;
@@ -42,12 +44,17 @@ public class Ticket {
 
     @Override
     public String toString() {
+        DecimalFormat df = new DecimalFormat("#0.00");
+        String seats = seatList == null
+                ? "[]"
+                : seatList.stream().map(String::valueOf).collect(Collectors.joining(", ", "[", "]"));
+
         return "Ticket{" +
-                "movie=" + movie.getMovieName() +
-                ", theater=" + theater.getTheaterName()+
-                ", screen=" + screen.getScreenName() +
-                ", seatList=" + seatList +
-                ", amount=" + amount +
-                '}';
+                " movie='" + movie.getMovieName() + '\'' +
+                ", theater='" + theater.getTheaterName() + '\'' +
+                ", screen='" + screen.getScreenName() + '\'' +
+                ", seats=" + seats +
+                ", amount=" + df.format(amount) +
+                " }";
     }
 }
