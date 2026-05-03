@@ -3,12 +3,10 @@ package LLDDesigns.ATM.Model;
 public class BankAccount {
     private final String accountNumber;
     private  int accountBalance;
-
+    private final String accountHolderName;
     public void setAccountBalance(int accountBalance) {
         this.accountBalance = accountBalance;
     }
-
-    private final String accountHolderName;
 
     public String getAccountNumber() {
         return accountNumber;
