@@ -5,7 +5,7 @@ import LLDDesigns.ATM.Model.Card;
 import LLDDesigns.ATM.Service.ATMMachine;
 
 
-public class IdleState implements ATMState{
+public class IdleState extends DefaultState{
     private final ATMMachine atmMachine;
 
     public IdleState(ATMMachine atmMachine) {
@@ -18,27 +18,6 @@ public class IdleState implements ATMState{
         System.out.println("Card Inserted.");
         atmMachine.setState(new CardInsertedState(atmMachine));
     }
-
-    @Override
-    public void enterPin(String pin) {
-        System.out.println("No Card inserted");
-    }
-
-    @Override
-    public void selectOption(String option) {
-        System.out.println("No Card inserted");
-    }
-
-    @Override
-    public void dispenseCash(int cash) {
-        System.out.println("No Card inserted");
-    }
-
-    @Override
-    public void ejectCard() {
-        System.out.println("No Card inserted");
-    }
-
     @Override
     public ATMStatus getStatus() {
         return null;

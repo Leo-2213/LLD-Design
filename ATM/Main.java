@@ -7,7 +7,7 @@ import LLDDesigns.ATM.Repository.ATMRepository;
 import LLDDesigns.ATM.Service.ATMMachine;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IllegalAccessException {
         ATM atm = new ATM.ATMBuilder().id(1).oneHundredCount(50).twoHundredCount(20).fiveHundredCount(10).cashAvailable(1400).build();
         ATMRepository atmRepository = new ATMRepository();
         atmRepository.save("1", atm);

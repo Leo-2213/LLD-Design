@@ -6,26 +6,11 @@ import LLDDesigns.ATM.Enum.ATMStatus;
 import LLDDesigns.ATM.Model.Card;
 import LLDDesigns.ATM.Service.ATMMachine;
 
-public class DispenseCashState implements ATMState{
+public class DispenseCashState extends DefaultState{
     private final ATMMachine atmMachine;
 
     public DispenseCashState(ATMMachine atmMachine) {
         this.atmMachine = atmMachine;
-    }
-
-    @Override
-    public void insertCard(Card card) {
-        System.out.println("Card is already in");
-    }
-
-    @Override
-    public void enterPin(String pin) {
-        System.out.println("Authentication already completed");
-    }
-
-    @Override
-    public void selectOption(String option) {
-        System.out.println("Option already selected");
     }
 
     @Override

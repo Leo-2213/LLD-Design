@@ -43,10 +43,10 @@ public class ATMMachine {
         return atm;
     }
 
-    public void insertCard(Card card){state.insertCard(card);}
-    public void enterPin(String pin){state.enterPin(pin);}
-    public void  selectOption( String option){state.selectOption(option);}
-    public void dispenseCash(int cash){state.dispenseCash(cash);}
-    public void ejectCard(){state.ejectCard();}
+    public void insertCard(Card card) throws IllegalAccessException {state.insertCard(card);}
+    public void enterPin(String pin) throws IllegalAccessException {state.enterPin(pin);}
+    public void  selectOption( String option) throws IllegalAccessException {state.selectOption(option);}
+    public void dispenseCash(int cash) throws IllegalAccessException {state.dispenseCash(cash);}
+    public void ejectCard() throws IllegalAccessException {state.ejectCard();}
 
 }
